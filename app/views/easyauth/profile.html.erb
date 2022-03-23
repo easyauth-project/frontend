@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-3">
+    <p class="lead">Hello, <%= unless session[:name].nil? then session[:name] else "user" end %>!</p>
+    <div class="list-group">
+      <a href=
+      <%="/" %>
+      class="list-group-item">Home</a> <a href=
+      <%="/create_cert" %>
+      class="list-group-item">Create CSR</a> 
+      <a href=
+      <%="/profile/#{session[:id]}" %>
+      class="list-group-item active">Edit Profile</a>
+    </div>
+  </div>
+  <div class="col-md-9">
+
+
+
+
+    <h1>Edit User Account</h1>
+    <%= form_tag do %>
+    <fieldset>
+      <label >Name:</label><br>
+      <%= text_field_tag 'name', '', size: "50",  value: @user[:name]%><br>
+
+      <label>Email:</label><br>
+      <%= text_field_tag 'email', '', size: "50",  value: @user[:email]%><br>
+
+
+      <label>Password:</label><br>
+      <%= password_field_tag 'password', '', size: "50"%>
+      <br>
+      <input type="submit" value="Submit">
+    </fieldset>
+    <br>
+
+    <%= link_to("Delete User", "/delete_user/#{@user[:id]}") %>
+
+    <% if @user[:certificate_id] %>
+    <% if session[:admin] %>
+    <%=  link_to "Delete Certificate", "/delete_certificate/#{@user[:certificate_id]}" %>
+    <% end %>
+    <% if @user[:id] == session[:id] %>
+    <%= link_to "Revoke Certificate", "/revoke_certificate/#{@user[:certificate_id]}" %>
+    <% end %>
+    <% end %>
+
+    <% end %>
+  </div>
+</div>

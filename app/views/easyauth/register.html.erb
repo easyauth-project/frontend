@@ -1,0 +1,23 @@
+    <div class="row">
+      <div class="col-md-3">
+        <p class="lead">Hello, <%= unless session[:name].nil? then session[:name] else "user" end %>!</p>
+        <div class="list-group">
+        </div>
+      </div>
+    </div>
+
+    <h1>Create  Account</h1>
+    <%= form_tag do %>
+    <label>Name:</label><br>
+    <%= text_field_tag 'name', '', size: "50"  %><br>
+
+    <label>Email:</label><br>
+    <%= text_field_tag 'email', '', size: "50" %><br>
+
+    <label>Password:</label><br>
+    <%= password_field_tag 'password', '', size: "50" %>
+    <br>
+
+    <input type="submit" value="Submit">
+
+    <% end %>
